@@ -5,7 +5,6 @@
  *                                                                                           *
  ******************************************************************************************* */
 
-
 /**
  * Returns the result of concatenation of two strings.
  *
@@ -21,7 +20,6 @@
 function concatenateStrings(value1, value2) {
   return `${value1}${value2}`;
 }
-
 
 /**
  * Returns the length of given string.
@@ -68,7 +66,6 @@ function getStringFromTemplate(firstName, lastName) {
 function extractNameFromTemplate(value) {
   return value.slice(7, -1);
 }
-
 
 /**
  * Returns a first char of the given string.
@@ -145,7 +142,6 @@ function unbracketTag(str) {
   return str.slice(1, -1);
 }
 
-
 /**
  * Converts all characters of the specified string into the upper case
  *
@@ -215,7 +211,6 @@ function getRectangleString(width, height) {
   return upEdge + allMiddle + downEdge;
 }
 
-
 /**
  * Encode specified string with ROT13 cipher
  * See details:  https://en.wikipedia.org/wiki/ROT13
@@ -234,10 +229,21 @@ function getRectangleString(width, height) {
  */
 function encodeToRot13(/* str */) {
   throw new Error('Not implemented');
-  // const alphabet = [abcdefjhigklmnopqrstuvwxyz];
-  // const alphabetUpper = [ABCDEFGHIJKLMNOPQRSTUVWXYZ];
+  // const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'j', 'h', 'i', 'g', 'k', 'l', 'm', 'n', 'o',
+  // 'p', 'q', 'r,', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  // const alphabetUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+  // 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-  // return str.replace(/[a-zA-Z]/g, () => {i = i + 13})
+  // for (let letter of str) {
+  //   let i;
+
+  //   if (letter === alphabet[i]) {
+  //     letter = alphabet[i + 13];
+  //   } else if (letter === alphabetUpper[i]) {
+  //     letter = alphabetUpper[i + 13];
+  //   }
+
+  // }
 }
 
 /**
@@ -253,10 +259,12 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'string' || value instanceof String) {
+    return true;
+  }
+  return false;
 }
-
 
 /**
  * Returns playid card id.
@@ -282,10 +290,23 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
-}
+function getCardId(value) {
+  const cardsPack = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  let result;
+  let i = 0;
 
+  while (i <= cardsPack.length) {
+    if (cardsPack[i] === value) {
+      result = i;
+      return result;
+    }
+    i += 1;
+  }
+  return result;
+}
 
 module.exports = {
   concatenateStrings,
