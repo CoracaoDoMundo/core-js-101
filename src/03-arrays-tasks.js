@@ -41,7 +41,10 @@ function generateOdds(/* len */) {
   //   return [1];
   // }
   // const arr = new Array(len);
-  // arr.map(_, i => i + (i + 1));
+  // arr.map((item, i) => {
+  //   item.replace(i + (i + 1));
+  //   return item;
+  // });
   // for (let i = 0; i < len; i += 1) {
   //   arr.push(i + (i + 1));
   // }
@@ -62,8 +65,8 @@ function generateOdds(/* len */) {
  *    [0, 1, 2, 3, 4, 5] => [0, 1, 2, 3, 4, 5,   0, 1, 2, 3, 4, 5]
  *    [] => []
  */
-function doubleArray(/* arr */) {
-  throw new Error('Not implemented');
+function doubleArray(arr) {
+  return arr.concat(arr);
 }
 
 
@@ -78,8 +81,9 @@ function doubleArray(/* arr */) {
  *    [-1, 2, -5, -4, 0] => [ 2 ]
  *    [] => []
  */
-function getArrayOfPositives(/* arr */) {
-  throw new Error('Not implemented');
+function getArrayOfPositives(arr) {
+  const res = arr.filter((item) => item > 0);
+  return res;
 }
 
 /**
@@ -93,8 +97,9 @@ function getArrayOfPositives(/* arr */) {
  *    [ 1, 2, 3, 4, 5 ] => []
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
-function getArrayOfStrings(/* arr */) {
-  throw new Error('Not implemented');
+function getArrayOfStrings(arr) {
+  const res = arr.filter((item) => typeof item === 'string');
+  return res;
 }
 
 /**
