@@ -20,8 +20,8 @@
  *    ['Array', 'Number', 'string'], 'Date'    => -1
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
+function findElement(arr, value) {
+  return arr.indexOf(value);
 }
 
 /**
@@ -37,6 +37,16 @@ function findElement(/* arr, value */) {
  */
 function generateOdds(/* len */) {
   throw new Error('Not implemented');
+  // if (len === 1) {
+  //   return [1];
+  // }
+  // const arr = new Array(len);
+  // arr.map(_, i => i + (i + 1));
+  // for (let i = 0; i < len; i += 1) {
+  //   arr.push(i + (i + 1));
+  // }
+
+  // return arr;
 }
 
 
