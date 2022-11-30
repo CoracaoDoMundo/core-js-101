@@ -295,11 +295,16 @@ function getSecondItems(arr) {
 function propagateItemsByPositionIndex(/* arr */) {
   throw new Error('Not implemented');
 
-  // if (arr.length === 1) {
+  // if (arr.length === 1 || arr.length === 0) {
   //   return arr;
   // }
-  // const res = arr.map((item, i) => `${item},`.repeat(i + 1));
-  // return res;
+  // const alpha = arr.map((item, i) => `${item},`.repeat(i + 1));
+  // const beta = alpha.reduce((a, b) => a.concat(b)).slice(0, -1);
+  // const gamma = [beta].map((el) => el.split(','));
+
+  // const newestRes = newRes.filter((el) => el !== ',');
+
+  // return gamma;
 }
 
 
@@ -425,8 +430,8 @@ function findAllOccurrences(arr, item) {
  *    [1, 2, 3, 4, 5]                   => '1,2,3,4,5'
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  return arr.join(',');
 }
 
 
@@ -497,6 +502,18 @@ function getIdentityMatrix(/* n */) {
  */
 function getIntervalArray(/* start, end */) {
   throw new Error('Not implemented');
+  // const arr = [start];
+  // const array = [];
+  // if (start === end) {
+  //   return arr;
+  // }
+  // array.push(start);
+  // const res = arr.reduce((_, item) => {
+  //   if (item !== end) {
+  //     item = item + 1;
+  //   }
+  // });
+  // return res;
 }
 
 /**
@@ -510,8 +527,9 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const obj = new Set(arr);
+  return [...obj];
 }
 
 /**
@@ -564,6 +582,9 @@ function group(/* array, keySelector, valueSelector */) {
  */
 function selectMany(/* arr, childrenSelector */) {
   throw new Error('Not implemented');
+  // const arrTwo = arr.flat();
+  // const res = arrTwo.split('');
+  // return res;
 }
 
 
