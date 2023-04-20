@@ -227,23 +227,26 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
-  // const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'j', 'h', 'i', 'g', 'k', 'l', 'm', 'n', 'o',
-  // 'p', 'q', 'r,', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  // const alphabetUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-  // 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+function encodeToRot13(str) {
+  const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+  'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'];
+  const alphabetUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+  'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
 
-  // for (let letter of str) {
-  //   let i;
+  const strArr = str.split("");
+  let result = [];
 
-  //   if (letter === alphabet[i]) {
-  //     letter = alphabet[i + 13];
-  //   } else if (letter === alphabetUpper[i]) {
-  //     letter = alphabetUpper[i + 13];
-  //   }
+  for (let i = 0; i < strArr.length; i++) {
 
-  // }
+    if (alphabet.indexOf(strArr[i]) !== -1) {
+      result.push(alphabet[alphabet.indexOf(strArr[i]) + 13]);
+    } else if (alphabetUpper.indexOf(strArr[i]) !== -1) {
+      result.push(alphabetUpper[alphabetUpper.indexOf(strArr[i]) + 13]);
+    } else if (alphabet.indexOf(strArr[i]) === -1  && alphabetUpper.indexOf(strArr[i]) === -1) {
+      result.push(strArr[i]);
+    }
+}
+    return result.join("");
 }
 
 /**
