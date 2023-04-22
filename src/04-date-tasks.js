@@ -98,69 +98,73 @@ function timeSpanToString(startDate, endDate) {
   // console.log("iso:", differenceIso);
 
   return differenceIso.slice(11, -1);
-  // let hours = difference / 3600000;
-  // console.log('hours:', hours);
-  // let hoursFin, minutes, minutesFin, seconds, secondsFin;
-
-  // if (difference === 0) {
-  //   return `00:00:00.000`;
-  // }
-
-  // if (Number.isInteger(hours)) {
-  //   if (hours >= 1 && hours < 10) {
-  //     hoursFin = `0${hours}`;
-  //   } else if (hours > 10) {
-  //     hoursFin = hours;
-  //   }
-  //   return `${hoursFin}:00:00.000`;
-  // } else {
-  //   // hours = hours.toFixed(2);
-  //   // console.log('hours:', hours);
-
-  //   if (hours < 1) {
-  //     hoursFin = '00';
-  //   } else if (hours < 10) {
-  //     hoursFin = `0${hours}`;
-  //   } else {
-  //     hoursFin = Math.trunc(hours);
-  //   }
-  //   console.log('hoursFin:', hoursFin);
-
-  //   minutes = (hours - Math.trunc(hours)) * 60;
-  //   console.log('minutes:', minutes);
-
-  //   if (Number.isInteger(minutes)) {
-  //     if (minutes > 1 && minutes < 10) {
-  //       minutesFin = `0${minutes}`;
-  //     } else if (minutes > 10) {
-  //       minutesFin = minutes;
-  //     }
-  //     return `${hoursFin}:${minutesFin}:00.000`;
-  //   } else {
-  //     // minutes = minutes.toFixed(2);
-  //     // console.log('minutes:', minutes);
-
-  //     if (minutes < 1) {
-  //       minutesFin = '00';
-  //     } else if (minutes < 10) {
-  //       minutesFin = `0${minutes}`;
-  //     } else {
-  //       minutesFin = Math.trunc(minutes);
-  //     }
-  //     console.log('minutesFin:', minutesFin);
-
-  //     seconds = ((minutes - Math.trunc(minutes)) * 60).toFixed(3);
-  //     console.log('seconds:', seconds);
-
-  //       if (seconds > 1 && seconds < 10) {
-  //         secondsFin = `0${seconds}`;
-  //       } else if (seconds > 10) {
-  //         secondsFin = seconds;
-  //       }
-  //       return `${hoursFin}:${minutesFin}:${secondsFin}`;
-  //   }
-  // }
 }
+
+// THE ROAD TO THE KNOWLEDGE THAT IN JS DATES CAN BE DEDUCTIBLE:
+
+// let hours = difference / 3600000;
+// console.log('hours:', hours);
+// let hoursFin, minutes, minutesFin, seconds, secondsFin;
+
+// if (difference === 0) {
+//   return `00:00:00.000`;
+// }
+
+// if (Number.isInteger(hours)) {
+//   if (hours >= 1 && hours < 10) {
+//     hoursFin = `0${hours}`;
+//   } else if (hours > 10) {
+//     hoursFin = hours;
+//   }
+//   return `${hoursFin}:00:00.000`;
+// } else {
+//   // hours = hours.toFixed(2);
+//   // console.log('hours:', hours);
+
+//   if (hours < 1) {
+//     hoursFin = '00';
+//   } else if (hours < 10) {
+//     hoursFin = `0${hours}`;
+//   } else {
+//     hoursFin = Math.trunc(hours);
+//   }
+//   console.log('hoursFin:', hoursFin);
+
+//   minutes = (hours - Math.trunc(hours)) * 60;
+//   console.log('minutes:', minutes);
+
+//   if (Number.isInteger(minutes)) {
+//     if (minutes > 1 && minutes < 10) {
+//       minutesFin = `0${minutes}`;
+//     } else if (minutes > 10) {
+//       minutesFin = minutes;
+//     }
+//     return `${hoursFin}:${minutesFin}:00.000`;
+//   } else {
+//     // minutes = minutes.toFixed(2);
+//     // console.log('minutes:', minutes);
+
+//     if (minutes < 1) {
+//       minutesFin = '00';
+//     } else if (minutes < 10) {
+//       minutesFin = `0${minutes}`;
+//     } else {
+//       minutesFin = Math.trunc(minutes);
+//     }
+//     console.log('minutesFin:', minutesFin);
+
+//     seconds = ((minutes - Math.trunc(minutes)) * 60).toFixed(3);
+//     console.log('seconds:', seconds);
+
+//       if (seconds > 1 && seconds < 10) {
+//         secondsFin = `0${seconds}`;
+//       } else if (seconds > 10) {
+//         secondsFin = seconds;
+//       }
+//       return `${hoursFin}:${minutesFin}:${secondsFin}`;
+//   }
+// }
+// }
 // let differenceHours = Math.floor(eDateSeconds - sDateSeconds % 3600000);
 // let differenceMinutes = Math.floor(eDateSeconds - sDateSeconds % 600000)
 // console.log("hours:", differenceHours);
@@ -231,7 +235,47 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  throw new Error('Not implemented');
+
+  let angle,
+    minutes = new Date(date).getUTCMinutes(),
+    hours = new Date(date).getUTCHours(),
+    minAngleGrau = minutes * 6,
+    dividerOne,
+    dividerTwo;
+
+  if (hours > 12) {
+    hours = hours - 12;
+  }
+
+  let hourAngleGrau = hours * 30 + minutes * 0.5;
+
+  if (minAngleGrau === hourAngleGrau) {
+    return 0;
+  }
+
+
+  if (minAngleGrau < hourAngleGrau) {
+    dividerOne = minAngleGrau;
+    dividerTwo = hourAngleGrau;
+  } else {
+    dividerOne = hourAngleGrau;
+    dividerTwo = minAngleGrau;
+  }
+
+  let partOne = dividerOne;
+  let angleOne = dividerTwo - dividerOne;
+  let partTwo = 360 - dividerTwo;
+  let angleTwo = partOne + partTwo;
+
+  if (angleOne > angleTwo) {
+    angle = angleTwo;
+  } else if (angleOne < angleTwo) {
+    angle = angleOne;
+  } else {
+    angle = angleOne;
+  }
+
+  return angle * (Math.PI / 180);
 }
 
 module.exports = {
