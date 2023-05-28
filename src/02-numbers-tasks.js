@@ -112,9 +112,8 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  let cos =
-    (x1 * x2 + y1 * y2) /
-    (Math.sqrt(x1 ** 2 + y1 ** 2) * Math.sqrt(x2 ** 2 + y2 ** 2));
+  const cos = (x1 * x2 + y1 * y2)
+    / (Math.sqrt(x1 ** 2 + y1 ** 2) * Math.sqrt(x2 ** 2 + y2 ** 2));
   return Math.acos(cos);
 }
 
@@ -187,7 +186,7 @@ function roundToPowerOfTen(num, pow) {
   if (pow === 0) {
     return num;
   }
-  let powAdv = 10 ** pow;
+  const powAdv = 10 ** pow;
   return Math.round(num / powAdv) * powAdv;
 }
 
@@ -213,14 +212,14 @@ function isPrime(n) {
     return true;
   }
 
-  let x = 17 >= n ? n - 1 : 17;
+  const x = n <= 17 ? n - 1 : 17;
   let i = 2;
 
   while (i < x) {
     if (Number.isInteger(n / i)) {
       return false;
     }
-    i++;
+    i += 1;
   }
   return true;
 }
@@ -241,15 +240,14 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  let result = parseInt(value);
+  const result = parseInt(value, 10);
 
   if (Number.isNaN(result)) {
     return def;
-  } else if (typeof result === 'number') {
+  } if (typeof result === 'number') {
     return result;
-  } else {
-    return def;
   }
+  return def;
 }
 
 module.exports = {

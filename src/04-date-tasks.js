@@ -52,14 +52,13 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-  let d = new Date(date);
-  let year = d.getFullYear();
+  const d = new Date(date);
+  const year = d.getFullYear();
 
   if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 /**
@@ -79,8 +78,8 @@ function isLeapYear(date) {
  */
 function timeSpanToString(startDate, endDate) {
   // throw new Error('Not implemented');
-  let sDate = new Date(startDate),
-    eDate = new Date(endDate);
+  const sDate = new Date(startDate);
+  const eDate = new Date(endDate);
   // console.log("sDate:", sDate);
   // console.log("eDate:", eDate);
   // let sDateSeconds = Date.parse(sDate);
@@ -88,13 +87,13 @@ function timeSpanToString(startDate, endDate) {
   // console.log("sDateSeconds:", sDateSeconds);
   // console.log("eDateSeconds:", eDateSeconds);
 
-  let difference = eDate - sDate;
+  const difference = eDate - sDate;
   // console.log('difference:', difference);
 
-  let differenceDate = new Date(difference);
+  const differenceDate = new Date(difference);
   // console.log("differenceDate:", differenceDate);
 
-  let differenceIso = differenceDate.toISOString();
+  const differenceIso = differenceDate.toISOString();
   // console.log("iso:", differenceIso);
 
   return differenceIso.slice(11, -1);
@@ -235,19 +234,18 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-
-  let angle,
-    minutes = new Date(date).getUTCMinutes(),
-    hours = new Date(date).getUTCHours(),
-    minAngleGrau = minutes * 6,
-    dividerOne,
-    dividerTwo;
+  let angle;
+  const minutes = new Date(date).getUTCMinutes();
+  let hours = new Date(date).getUTCHours();
+  const minAngleGrau = minutes * 6;
+  let dividerOne;
+  let dividerTwo;
 
   if (hours > 12) {
-    hours = hours - 12;
+    hours -= 12;
   }
 
-  let hourAngleGrau = hours * 30 + minutes * 0.5;
+  const hourAngleGrau = hours * 30 + minutes * 0.5;
 
   if (minAngleGrau === hourAngleGrau) {
     return 0;
@@ -262,10 +260,10 @@ function angleBetweenClockHands(date) {
     dividerTwo = minAngleGrau;
   }
 
-  let partOne = dividerOne;
-  let angleOne = dividerTwo - dividerOne;
-  let partTwo = 360 - dividerTwo;
-  let angleTwo = partOne + partTwo;
+  const partOne = dividerOne;
+  const angleOne = dividerTwo - dividerOne;
+  const partTwo = 360 - dividerTwo;
+  const angleTwo = partOne + partTwo;
 
   if (angleOne > angleTwo) {
     angle = angleTwo;
