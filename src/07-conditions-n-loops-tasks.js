@@ -324,7 +324,10 @@ function isCreditCardNumber(ccn) {
     if (i % 2 !== 0) {
       let n = controlNum[i] * 2;
       if (n > 9) {
-        n = n.toString().split('').map((elem) => Number(elem));
+        n = n
+          .toString()
+          .split('')
+          .map((elem) => Number(elem));
         result += n.reduce((a, b) => a + b);
       } else {
         result += n;
@@ -352,7 +355,11 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  const sum = num.toString().split('').map((el) => Number(el)).reduce((a, b) => a + b);
+  const sum = num
+    .toString()
+    .split('')
+    .map((el) => Number(el))
+    .reduce((a, b) => a + b);
   if (sum > 9) {
     return getDigitalRoot(sum);
   }
@@ -380,8 +387,42 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const brackets = {
+    '(': ')',
+    '{': '}',
+    '[': ']',
+    '<': '>',
+  };
+
+  const arr = str.split('');
+
+  if (arr.length % 2 !== 0) {
+    return false;
+  }
+
+  const stock = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (brackets[arr[i]]) {
+      stock.push(arr[i]);
+    }
+    if (!brackets[arr[i]]) {
+      const keys = Object.keys(brackets);
+      const values = Object.values(brackets);
+      const l = stock.length - 1;
+
+      for (let j = 0; j < keys.length; j += 1) {
+        if (stock[l] === keys[j] && values[j] === arr[i]) {
+          stock.pop();
+          break;
+        }
+      }
+    }
+  }
+  if (stock.length === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
