@@ -503,20 +503,18 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
-  // console.log('m1:', m1);
-  // console.log('m2:', m2);
-  // let result = new Array(m1.length).fill(new Array(m2[0].length).fill(0));
-  // console.log('result:', result);
-  // for (let i = 0; i < m1[0].length; i += 1) {
-  //   for (let j = 0; j < m1.length; j += 1) {
-  //     console.log('m1[i][j]:', m1[i][j]);
-  //     console.log('m2[j][i]:', m2[j][i]);
-  //     result[i][j] = m1[i][j] * m2[j][i];
-  //   }
-  // }
-  // console.log('result:', result);
+function getMatrixProduct(m1, m2) {
+  const result = new Array(m1.length);
+  for (let i = 0; i < m1.length; i += 1) {
+    result[i] = new Array(m2[0].length);
+    for (let j = 0; j < m2[0].length; j += 1) {
+      result[i][j] = 0;
+      for (let k = 0; k < m1[0].length; k += 1) {
+        result[i][j] += m1[i][k] * m2[k][j];
+      }
+    }
+  }
+  return result;
 }
 
 /**
@@ -552,16 +550,24 @@ function getMatrixProduct(/* m1, m2 */) {
 function evaluateTicTacToePosition(position) {
   for (let i = 0; i < position[0].length; i += 1) {
     for (let j = 0; j < position.length; j += 1) {
-      if (position[0][j] === position[1][j] && position[1][j] === position[2][j] && position[0][j] !== undefined) {
+      if (position[0][j] === position[1][j]
+        && position[1][j] === position[2][j]
+        && position[0][j] !== undefined) {
         return position[0][j];
       }
-      if (position[i][0] === position[i][1] && position[i][1] === position[i][2] && position[i][0] !== undefined) {
+      if (position[i][0] === position[i][1]
+        && position[i][1] === position[i][2]
+        && position[i][0] !== undefined) {
         return position[i][0];
       }
-      if (position[0][0] === position[1][1] && position[1][1] === position[2][2] && position[0][0] !== undefined) {
+      if (position[0][0] === position[1][1]
+        && position[1][1] === position[2][2]
+        && position[0][0] !== undefined) {
         return position[0][0];
       }
-      if (position[2][0] === position[1][1] && position[1][1] === position[0][2] && position[2][0] !== undefined) {
+      if (position[2][0] === position[1][1]
+        && position[1][1] === position[0][2]
+        && position[2][0] !== undefined) {
         return position[2][0];
       }
     }
