@@ -62,7 +62,6 @@ function getPowerFunction(exponent) {
  */
 function getPolynom(...rest) {
   const result = (coef) => {
-    // console.log('coef:', coef);
     const argsArr = Object.entries(rest).reverse();
     let res = 0;
     for (let i = 0; i < argsArr.length; i += 1) {
@@ -115,20 +114,20 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
-  // console.log('func:', func);
-  // console.log('attempt:', attempts);
-  // const cur = func();
-  // console.log('cur:', cur);
-  // let att = 1;
-  // return () => {
-  //   if (att < attempts) {
-  //     att += 1;
-  //     console.log('att:', att);
-  //     func();
-  //   }
-  // };
+function retry(func, attempts) {
+  let cur;
+  let att = 0;
+  return () => {
+    while (att < attempts) {
+      try {
+        cur = func();
+        return cur;
+      } catch (error) {
+        att += 1;
+      }
+    }
+    return null;
+  };
 }
 
 /**
