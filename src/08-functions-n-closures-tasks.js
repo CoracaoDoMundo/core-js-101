@@ -155,12 +155,14 @@ function retry(func, attempts) {
  */
 function logger(func, logFunc) {
   return (...rest) => {
-    const argsString = rest.map((el) => {
-      if (Array.isArray(el) || typeof el === 'object') {
-        return JSON.stringify(el);
-      }
-      return el;
-    }).join(',');
+    const argsString = rest
+      .map((el) => {
+        if (Array.isArray(el) || typeof el === 'object') {
+          return JSON.stringify(el);
+        }
+        return el;
+      })
+      .join(',');
     logFunc(`${func.name}(${argsString}) starts`);
     const res = func(...rest);
     logFunc(`${func.name}(${argsString}) ends`);
@@ -202,8 +204,18 @@ function partialUsingArguments(fn, ...args1) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  const cache = {};
+  const res = Math.floor(startFrom);
+  return () => {
+    if (cache[startFrom] !== undefined) {
+      const newValue = cache[startFrom] + 1;
+      cache[startFrom] = newValue;
+    } else if (cache[startFrom] === undefined) {
+      cache[startFrom] = res;
+    }
+    return cache[startFrom];
+  };
 }
 
 module.exports = {
