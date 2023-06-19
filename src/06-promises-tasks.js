@@ -118,6 +118,18 @@ function getFastestPromise(array) {
  */
 function chainPromises(/* array, action */) {
   throw new Error('Not implemented');
+
+  // return array
+  //   .reduce((acc, cur) => {
+  //     return acc.then((accumulator) => {
+  //       return cur
+  //         .then((value) => action(accumulator, value))
+  //         .catch(() => accumulator);
+  //     });
+  //   }, Promise.resolve())
+  //   .catch(() => {
+  //     throw new Error('Unhandled Rejection');
+  //   });
 }
 
 module.exports = {
